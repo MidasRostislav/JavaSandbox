@@ -1,0 +1,8 @@
+55 * 55 = 3025.0
+12 + 22 = 34.0
+fff // 12kk33 = Error! Not number
+177 - 888 = -711.0
+1111 / 9890 = 0.11233569261880688
+66 / 0 = Error! Division by zero
+34 // 66 = Operation Error!
+feegverobvneropbnetrojntgberto урпукерокоо gewgergqgh = Error! Not number
