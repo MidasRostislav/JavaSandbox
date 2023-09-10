@@ -4,6 +4,26 @@ import java.io.*;
 
 public class IOMethods {
 
+
+    public static void copyReplaceSpaces(String srcFile, String targetFile){
+        int ch;
+
+        try(FileReader fr = new FileReader(srcFile);
+            FileWriter fw = new FileWriter(targetFile)){
+
+            do{
+                ch = fr.read();
+                if(ch != -1)
+                    fw.write(ch == ' ' ? '-' : ch);
+            }while (ch != -1);
+
+        }
+        catch (IOException exc){
+            System.out.println(exc);
+        }
+
+    }
+
     public static void AvgNums()
         throws IOException{
         String str;
