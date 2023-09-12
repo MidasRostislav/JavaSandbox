@@ -5,7 +5,7 @@ import java.io.*;
 public class IOMethods {
 
 
-    public static void copyReplaceSpaces(String srcFile, String targetFile){
+    public void copyReplaceSpaces(String srcFile, String targetFile){
         int ch;
 
         try(FileReader fr = new FileReader(srcFile);

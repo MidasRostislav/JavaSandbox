@@ -1,21 +1,35 @@
-import Help.Help.*;
-import TextFiles.IOMethods;
 import java.io.*;
 import java.util.Scanner;
-import Calculator.FileCalculator;
-import static Help.Help.*;
-import static TextFiles.IOMethods.*;
+import Chapter11_Threads.*;
+
 
 
 public class Main {
 
     public static void main(String[] args)
     throws IOException{
-
+        useThreads();
 
 
     }
 
+    public static void useThreads(){
+        System.out.println("Main thread start");
+        MyThread mt = new MyThread("Child thread #1");
+        Thread thread = new Thread(mt);
+        thread.start();
+
+        for(int i = 0; i < 50; i++){
+            System.out.print(".");
+            try{
+                Thread.sleep(100);
+            }
+            catch (InterruptedException exc){
+                System.out.println("Main thread is interrupted");
+            }
+        }
+        System.out.println("Main thread ends");
+    }
 
     public static void secondWhahahaha()
     throws IOException{
