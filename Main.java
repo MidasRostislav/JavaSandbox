@@ -8,18 +8,53 @@ public class Main {
 
     public static void main(String[] args)
     throws IOException{
-        useThreads();
 
 
     }
 
-    public static void useThreads(){
-        System.out.println("Main thread start");
-        MyThread mt = new MyThread("Child thread #1");
-        Thread thread = new Thread(mt);
-        thread.start();
+    public static void usePriorityThreads(){
+        System.out.println("Main thread starts\n");
 
-        for(int i = 0; i < 50; i++){
+        Priority mt1 = new Priority("High priority");
+        mt1.thrd.setPriority(Thread.MAX_PRIORITY);
+        //System.out.println("High threads priority is " + mt1.thrd.getPriority());
+        Priority mt2 = new Priority("Low priority");
+        mt2.thrd.setPriority(Thread.MIN_PRIORITY);
+        //System.out.println("Low threads priority is " + mt2.thrd.getPriority());
+        Priority mt3 = new Priority("Default priority");
+        Priority mt4 = new Priority("Default priority");
+
+        mt1.thrd.start();
+        mt2.thrd.start();
+        mt3.thrd.start();
+        mt4.thrd.start();
+
+        //MyThread mt = new MyThread("Another thread #?");
+
+        try{
+            mt1.thrd.join();
+            mt2.thrd.join();
+            mt3.thrd.join();
+            mt4.thrd.join();
+            }
+        catch (InterruptedException exc){
+            System.out.println("Main thread is interrupted");
+        }
+        System.out.println("\nMain thread ends\n");
+        System.out.println("High priority counter = " + mt1.count);
+        System.out.println("Low priority counter = " + mt2.count);
+        System.out.println("Default priority counter = " + mt3.count);
+        System.out.println("Default priority counter = " + mt4.count);
+
+    }
+
+    public static void useExtendThread(){
+        System.out.println("Main thread starts");
+
+        MyThreadExt mt = MyThreadExt.createAndStart("Child thread #1");
+//        MyThreadExt mt = new MyThreadExt("Another thread #?");
+//        mt.start();
+        do{
             System.out.print(".");
             try{
                 Thread.sleep(100);
@@ -27,6 +62,30 @@ public class Main {
             catch (InterruptedException exc){
                 System.out.println("Main thread is interrupted");
             }
+        }while(mt.isAlive());
+        System.out.println("Main thread ends");
+
+    }
+
+    public static void useThreads(){
+        System.out.println("Main thread starts");
+
+        MyThread mt1 = MyThread.createAndStart("Child thread #1");
+        MyThread mt2 = MyThread.createAndStart("Child thread #2");
+        MyThread mt3 = MyThread.createAndStart("Child thread #3");
+
+        //MyThread mt = new MyThread("Another thread #?");
+
+        try{
+            mt1.thrd.join();
+            System.out.println("Child thread #1 joined.");
+            mt2.thrd.join();
+            System.out.println("Child thread #2 joined.");
+            mt3.thrd.join();
+            System.out.println("Child thread #3 joined.");
+        }
+        catch (InterruptedException exc){
+            System.out.println("Main thread is interrupted");
         }
         System.out.println("Main thread ends");
     }
