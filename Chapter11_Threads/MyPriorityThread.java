@@ -1,14 +1,13 @@
 package Chapter11_Threads;
 
-public class Priority implements Runnable{
+public class MyPriorityThread extends MyThread{
 
-    public Thread thrd;
     public int count;
     static boolean stop = false;
     static String currentName;
 
-    public Priority(String name){
-        thrd = new Thread(this, name);
+    public MyPriorityThread(String name){
+        super(name);
         count = 0;
         currentName = name;
     }

@@ -8,21 +8,51 @@ public class Main {
 
     public static void main(String[] args)
     throws IOException{
+        useTickTockThreads();
+    }
 
+    public static void useTickTockThreads(){
+        TickTock tt = new TickTock();
+
+        MyTickTockThread mttt1 = MyTickTockThread.createAndStart("Tick", tt);
+        MyTickTockThread mttt2 = MyTickTockThread.createAndStart("Tock", tt);
+
+        try{
+            mttt1.thrd.join();
+            mttt2.thrd.join();
+        }
+        catch (InterruptedException exc){
+            System.out.println(exc);
+        }
+    }
+
+    public static void useMySumThreads(){
+        int[] a = {1,2,3,4,5};
+
+        MySumThread mst1 = MySumThread.createAndStart("Child thread #1", a);
+        MySumThread mst2 = MySumThread.createAndStart("Child thread #2", a);
+
+        try {
+            mst1.thrd.join();
+            mst2.thrd.join();
+        }
+        catch (InterruptedException exc){
+            System.out.println("Main thread interruption");
+        }
 
     }
 
     public static void usePriorityThreads(){
         System.out.println("Main thread starts\n");
 
-        Priority mt1 = new Priority("High priority");
+        MyPriorityThread mt1 = new MyPriorityThread("High priority");
         mt1.thrd.setPriority(Thread.MAX_PRIORITY);
         //System.out.println("High threads priority is " + mt1.thrd.getPriority());
-        Priority mt2 = new Priority("Low priority");
+        MyPriorityThread mt2 = new MyPriorityThread("Low priority");
         mt2.thrd.setPriority(Thread.MIN_PRIORITY);
         //System.out.println("Low threads priority is " + mt2.thrd.getPriority());
-        Priority mt3 = new Priority("Default priority");
-        Priority mt4 = new Priority("Default priority");
+        MyPriorityThread mt3 = new MyPriorityThread("Default priority");
+        MyPriorityThread mt4 = new MyPriorityThread("Default priority");
 
         mt1.thrd.start();
         mt2.thrd.start();

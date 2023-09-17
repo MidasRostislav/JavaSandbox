@@ -3,11 +3,10 @@ package Chapter11_Threads;
 public class SumArray {
 
     private int sum;
-
-    synchronized int sumArray(int[] nums) {
+    int sumArray(int[] nums) {
         sum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
+        for (int num : nums) {
+            sum += num;
             System.out.println("Actual sum for " + Thread.currentThread().getName() + " is " + sum);
             try {
                 Thread.sleep(10);

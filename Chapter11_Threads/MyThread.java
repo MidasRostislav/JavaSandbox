@@ -2,7 +2,6 @@ package Chapter11_Threads;
 
 public class MyThread implements Runnable {
     public Thread thrd;
-
     public MyThread(String name){
         thrd = new Thread(this, name);
     }
